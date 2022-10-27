@@ -1,7 +1,9 @@
 package com.bignerdranch.android.photogallery
 
+import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -57,8 +59,19 @@ class PollWorker(val context: Context, workerParameters: WorkerParameters)
 
             val notificationManager = NotificationManagerCompat.from(context)
             notificationManager.notify(0, notification)
+
+            context.sendBroadcast(Intent(ACTION_SHOW_NOTIFICATION), PERM_PRIVATE)
         }
+
+
 
         return Result.success()
     }
+
+    companion object {
+        const val ACTION_SHOW_NOTIFICATION =
+            "com.bignerdranch.android.photogallery.SHOW_NOTIFICATION"
+        const val PERM_PRIVATE = "com.bignerdranch.android.photogallery.PRIVATE"
+    }
+
 }
