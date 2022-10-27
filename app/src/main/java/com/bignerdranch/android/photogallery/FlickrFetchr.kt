@@ -21,6 +21,7 @@ class FlickrFetchr {
     private val flickrApi: FlickrApi
 
     init {
+
         val client = OkHttpClient.Builder()
             .addInterceptor(PhotoInterceptor())
             .build()
@@ -38,10 +39,8 @@ class FlickrFetchr {
         return flickrApi.fetchPhotos()
     }
 
-
     fun fetchPhotos(): LiveData<List<GalleryItem>> {
-        return fetchPhotoMetadata(fetchPhotosRequest())
-
+        return fetchPhotoMetdadata(fetchPhotosRequest())
     }
 
     fun searchPhotosRequest(query: String): Call<FlickrResponse> {
@@ -49,13 +48,11 @@ class FlickrFetchr {
     }
 
     fun searchPhotos(query: String): LiveData<List<GalleryItem>> {
-        return fetchPhotoMetadata(searchPhotosRequest(query))
-
+        return fetchPhotoMetdadata(searchPhotosRequest(query))
     }
 
-
-    private fun fetchPhotoMetadata(flickrRequest: Call<FlickrResponse>)
-            : LiveData<List<GalleryItem>> {
+    private fun fetchPhotoMetdadata(flickrRequest: Call<FlickrResponse>)
+            : LiveData<List<GalleryItem>>{
         val responseLiveData: MutableLiveData<List<GalleryItem>> = MutableLiveData()
 
         flickrRequest.enqueue(object : Callback<FlickrResponse> {
@@ -78,7 +75,9 @@ class FlickrFetchr {
         })
 
         return responseLiveData
+
     }
+
 
     @WorkerThread
     fun fetchPhoto(url: String): Bitmap? {

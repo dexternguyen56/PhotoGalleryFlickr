@@ -26,5 +26,4 @@ class PhotoGalleryActivity : AppCompatActivity() {
             return Intent(context, PhotoGalleryActivity::class.java)
         }
     }
-
 }
